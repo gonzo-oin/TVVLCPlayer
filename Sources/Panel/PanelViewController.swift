@@ -54,11 +54,6 @@ class PanelViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        // Hack to put a continous blur background behind the panel
-        // Hide the background bar of the tabBar and extend the background tabBar behind.
-        // This is done here since the background of tabBar is only available after the view has appeared.
-        tabBar.subviews[0].isHidden = true
         backgroundTopConstraint.constant = -tabBar.frame.height
     }
 
@@ -69,16 +64,11 @@ class PanelViewController: UIViewController {
         infoViewController.title = "Info"
         infoViewController.player = player
 
-        // swiftlint:disable force_cast line_length
-        let subtitlesViewController = storyboard!.instantiateViewController(withIdentifier: "subtitles") as! SubtitlesViewController
-        subtitlesViewController.title = "Subtitles"
-        subtitlesViewController.player = player
-
         // swiftlint:disable force_cast
         let audioViewController = storyboard!.instantiateViewController(withIdentifier: "audio") as! AudioViewController
         audioViewController.title = "Audio"
         audioViewController.player = player
-        viewControllers = [infoViewController, subtitlesViewController, audioViewController]
+        viewControllers = [infoViewController, audioViewController]
 
         contentView.layer.masksToBounds = true // Avoid content to appear on tabbar during panel content transition and height animation
 
