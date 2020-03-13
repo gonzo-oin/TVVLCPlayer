@@ -64,11 +64,16 @@ class PanelViewController: UIViewController {
         infoViewController.title = "Info"
         infoViewController.player = player
 
+        // swiftlint:disable force_cast line_length
+        let subtitlesViewController = storyboard!.instantiateViewController(withIdentifier: "subtitles") as! SubtitlesViewController
+        subtitlesViewController.title = "Subtitles"
+        subtitlesViewController.player = player
+
         // swiftlint:disable force_cast
         let audioViewController = storyboard!.instantiateViewController(withIdentifier: "audio") as! AudioViewController
         audioViewController.title = "Audio"
         audioViewController.player = player
-        viewControllers = [infoViewController, audioViewController]
+        viewControllers = [infoViewController, audioViewController, subtitlesViewController]
 
         contentView.layer.masksToBounds = true // Avoid content to appear on tabbar during panel content transition and height animation
 
